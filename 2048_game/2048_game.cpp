@@ -11,7 +11,8 @@ void cursorBlink()
     cursorInfo.bVisible = FALSE;
     SetConsoleCursorInfo(consoleHandle, &cursorInfo);
 }
-void gotoxy(short int x, short int y) {	
+void gotoxy(short int x, short int y) 
+{	
     COORD pos = { x, y };						     
     HANDLE output = GetStdHandle(STD_OUTPUT_HANDLE); 
     SetConsoleCursorPosition(output, pos);           
@@ -20,7 +21,7 @@ void gotoxy(short int x, short int y) {
 constexpr int area_SIZE = 16;
 bool isRunning = true;
 
-void printMap(int arr[area_SIZE])
+void printMap(char arr[area_SIZE])
 {
     cout << "\n\n\t_________________________________________________\n";
     cout << "\t|           |           |           |           |\n";
@@ -47,8 +48,23 @@ void printMap(int arr[area_SIZE])
 
 int main()
 {
-    int arr[area_SIZE]{ 0 };
+    srand(time(nullptr));
     cursorBlink();
+    char arr[area_SIZE];
+    for (auto& i : arr)
+    {
+        i = ' ';
+    }
+    
+    int randomNum = rand() % 2;
+    if (randomNum == 0)
+    {
+        randomNum = 2;
+    }
+    else
+    {
+        randomNum = 4;
+    }
 
     while (isRunning)
     {
@@ -56,21 +72,22 @@ int main()
         printMap(arr);
         if (GetAsyncKeyState(VK_UP) & 0x8000) {
             std::cout << "Up arrow key pressed!" << std::endl;
-            Sleep(300);
+            Sleep(100);
         }
         if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
             std::cout << "Down arrow key pressed!" << std::endl;
-            Sleep(300);
+            Sleep(100);
         }
         if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
             std::cout << "Left arrow key pressed!" << std::endl;
-            Sleep(300);
+            Sleep(100);
         }
         if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
             std::cout << "Right arrow key pressed!" << std::endl;
-            Sleep(300);
+            Sleep(100);
         }
         gotoxy(0, 0);
+       
     }
 
     return 0;
