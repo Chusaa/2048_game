@@ -3,6 +3,7 @@
 #include <Windows.h>
 
 using namespace std;
+
 void cursorBlink()
 {
     HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -56,37 +57,63 @@ int main()
         i = ' ';
     }
     
-    int randomNum = rand() % 2;
-    if (randomNum == 0)
-    {
-        randomNum = 2;
-    }
-    else
-    {
-        randomNum = 4;
-    }
+    int rnd = 0;       // определяет символ числа
+    int randomPos = 0; // позиция числа
+    char randomNum = ' ';    // число, появляющееся на поле
 
     while (isRunning)
     {
-       
+        randomPos = rand() % 16;
+        if (arr[randomPos] != ' ')
+        {
+            while (true)
+            {
+                randomPos = rand() % 16;
+                if (arr[randomPos] == ' ')
+                {
+                    break;
+                }
+                else if (count(arr, arr + 16, ' ') == 16)
+                {
+                    break;
+                }
+
+            }
+        }
+     
+        rnd = rand() % 2;
+        if (rnd == 0)
+        {
+            randomNum = '2';
+        }
+        else
+        {
+            randomNum = '4';
+        }
+        gotoxy(0, 0);
         printMap(arr);
+
         if (GetAsyncKeyState(VK_UP) & 0x8000) {
+            arr[randomPos] = randomNum;
             std::cout << "Up arrow key pressed!" << std::endl;
             Sleep(100);
         }
         if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
+            arr[randomPos] = randomNum;
             std::cout << "Down arrow key pressed!" << std::endl;
             Sleep(100);
         }
         if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
+            arr[randomPos] = randomNum;
             std::cout << "Left arrow key pressed!" << std::endl;
             Sleep(100);
         }
         if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
+            arr[randomPos] = randomNum;
             std::cout << "Right arrow key pressed!" << std::endl;
             Sleep(100);
         }
-        gotoxy(0, 0);
+        
        
     }
 
