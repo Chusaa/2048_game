@@ -19,8 +19,19 @@ void gotoxy(short int x, short int y)
     SetConsoleCursorPosition(output, pos);           
 }
 
-constexpr int area_SIZE = 16;
+const int area_SIZE = 16;
 bool isRunning = true;
+
+int emptyCount(char arr[area_SIZE])
+{
+    int count = 0;
+    for (int i = 0; i < area_SIZE; i++)
+    {
+        if (arr[i] == ' ')
+            count++;
+    }
+    return count;
+}
 
 void printMap(char arr[area_SIZE])
 {
@@ -58,26 +69,21 @@ int main()
     }
     
     int rnd = 0;       // определяет символ числа
-    int randomPos = 0; // позиция числа
+    int randomPos = rand() % 16; // позиция числа
     char randomNum = ' ';    // число, появляющееся на поле
 
     while (isRunning)
     {
-        randomPos = rand() % 16;
-        if (arr[randomPos] != ' ')
+        
+        if (arr[randomPos] != ' ' && emptyCount(arr) != 0)
         {
-            while (true)
+            while (true) 
             {
                 randomPos = rand() % 16;
                 if (arr[randomPos] == ' ')
                 {
                     break;
                 }
-                else if (count(arr, arr + 16, ' ') == 16)
-                {
-                    break;
-                }
-
             }
         }
      
@@ -94,26 +100,34 @@ int main()
         printMap(arr);
 
         if (GetAsyncKeyState(VK_UP) & 0x8000) {
-            arr[randomPos] = randomNum;
-            std::cout << "Up arrow key pressed!" << std::endl;
+            if (emptyCount(arr) != 0)
+            {
+                arr[randomPos] = randomNum;
+            }
             Sleep(100);
         }
         if (GetAsyncKeyState(VK_DOWN) & 0x8000) {
-            arr[randomPos] = randomNum;
-            std::cout << "Down arrow key pressed!" << std::endl;
+            if (emptyCount(arr) != 0)
+            {
+                arr[randomPos] = randomNum;
+            }
             Sleep(100);
         }
         if (GetAsyncKeyState(VK_LEFT) & 0x8000) {
-            arr[randomPos] = randomNum;
-            std::cout << "Left arrow key pressed!" << std::endl;
+            if (emptyCount(arr) != 0)
+            {
+                arr[randomPos] = randomNum;
+            }
             Sleep(100);
         }
         if (GetAsyncKeyState(VK_RIGHT) & 0x8000) {
-            arr[randomPos] = randomNum;
-            std::cout << "Right arrow key pressed!" << std::endl;
+            if (emptyCount(arr) != 0)
+            {
+                arr[randomPos] = randomNum;
+            }
             Sleep(100);
         }
-        
+        cout << emptyCount(arr) << endl;
        
     }
 

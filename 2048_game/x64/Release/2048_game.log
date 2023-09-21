@@ -1,0 +1,7 @@
+﻿  2048_game.cpp
+C:\Users\user\source\repos\2048_game\2048_game\2048_game.cpp(63,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Создание кода
+  Previous IPDB not found, fall back to full compilation.
+  All 17 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Создание кода завершено
+  2048_game.vcxproj -> C:\Users\user\source\repos\2048_game\x64\Release\2048_game.exe
